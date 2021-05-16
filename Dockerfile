@@ -9,7 +9,7 @@ ARG APP_PATH=/app
 WORKDIR $APP_PATH
 
 # Copy go mod
-COPY go.mod ./
+COPY go.mod go.sum ./
 
 # Download all dependencies.
 RUN go mod download && mkdir -p bin
@@ -22,5 +22,5 @@ FROM base as dev
 
 RUN go get github.com/githubnemo/CompileDaemon
 
-ENTRYPOINT CompileDaemon --build="go build -o bin/calendar-golang -v main.go" --command=./bin/calendar-golang
+ENTRYPOINT CompileDaemon --build="go build -o bin/calendar-golang -v src/main.go" --command=./bin/calendar-golang
 
