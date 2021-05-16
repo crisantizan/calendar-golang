@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  main:
+    container_name: 'calendar-golang-main'
+    ports:
+      - "8000:8000"
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dev
+    volumes:
+      - .:/app
