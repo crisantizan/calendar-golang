@@ -22,5 +22,5 @@ FROM base as dev
 
 RUN go get github.com/githubnemo/CompileDaemon
 
-ENTRYPOINT CompileDaemon --build="go build -o bin/calendar-golang -v src/main.go" --command=./bin/calendar-golang
+ENTRYPOINT CompileDaemon --build="go build -o bin/calendar-golang -v cmd/main.go" --command=./bin/calendar-golang
 

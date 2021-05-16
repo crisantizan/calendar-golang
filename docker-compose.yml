@@ -11,3 +11,13 @@ services:
       target: dev
     volumes:
       - .:/app
+    depends_on:
+      - mongo
+  mongo:
+    container_name: 'calendar-golang-mongo'
+    image: mongo
+    command: --config /etc/mongo/mongod.conf
+    ports:
+      - "${MONGO_PORT}:${MONGO_PORT}"
+    volumes:
+    - ~/.docker-dbs/mongo/calendar-golang:/data/db
