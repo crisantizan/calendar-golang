@@ -16,7 +16,7 @@ services:
   mongo:
     container_name: 'calendar-golang-mongo'
     image: mongo
-    command: --config /etc/mongo/mongod.conf
+    command: --quiet
     ports:
       - "${MONGO_PORT}:${MONGO_PORT}"
     volumes:

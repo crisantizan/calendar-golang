@@ -1,5 +1,5 @@
 # Base Stage
-FROM golang:1.16.4 as base
+FROM golang as base
 
 # Add Maintainer Info
 LABEL maintainer="Cristian Santiz <crisantizan@gmail.com>"

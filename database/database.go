@@ -1,31 +1,19 @@
 package database
 
-import (
-	"context"
-	"fmt"
-	"log"
-	"os"
+import "go.mongodb.org/mongo-driver/mongo"
 
-	"go.mongodb.org/mongo-driver/mongo"
-	"go.mongodb.org/mongo-driver/mongo/options"
-)
+type Database struct {
+	database string
+}
 
-func GetMongoConnection() {
-	mongoHost := os.Getenv("MONGO_HOST")
-	mongoPort := os.Getenv("MONGO_PORT")
+func (c *Database) GetCollection(collection string) *mongo.Collection {
+	client := GetMongoConnection()
 
-	clientOptions := options.Client().ApplyURI(fmt.Sprintf("mongodb://%s:%s", mongoHost, mongoPort))
-	client, err := mongo.Connect(context.TODO(), clientOptions)
+	return client.Database(c.database).Collection(collection)
+}
 
-	if err != nil {
-		log.Fatal(err)
+func New(database string) Database {
+	return Database{
+		database,
 	}
-
-	err = client.Ping(context.TODO(), nil)
-
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	fmt.Println("Connected to MongoDB :)))")
 }
